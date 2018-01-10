@@ -59,9 +59,6 @@ lib/omx/libOMX.Exynos.AVC.Encoder.so
 vendor/lib/libmalicore.bc
 vendor/lib/libRSDriverArm.so
 
-# RIL - Pinned to T805ZHU1CQB1 - build from source this
-lib/libsecnativefeature.so
-
 # Samsung S5P Multi Format Codec V5/V6 firmware (Used by Widevine) - Pinned to what ???
 vendor/firmware/mfc_fw.bin
 
