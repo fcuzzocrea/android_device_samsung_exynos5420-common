@@ -16,7 +16,9 @@
 
 COMMON_PATH := device/samsung/exynos5420-common
 
-DEVICE_PACKAGE_OVERLAYS += $(COMMON_PATH)/overlay
+DEVICE_PACKAGE_OVERLAYS += \
+    $(COMMON_PATH)/overlay \
+    $(COMMON_PATH)/overlay-lineage
 
 # Audio
 PRODUCT_PACKAGES += \
