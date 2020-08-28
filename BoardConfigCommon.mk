@@ -97,9 +97,6 @@ TARGET_BOOTLOADER_BOARD_NAME := universal5420
 TARGET_SOC := exynos5420
 TARGET_SLSI_VARIANT := bsp
 
-# Power
-TARGET_POWERHAL_VARIANT := samsung
-
 # Recovery
 BOARD_RECOVERY_SWIPE := true
 TARGET_RECOVERY_FSTAB := $(COMMON_PATH)/ramdisk/fstab.universal5420
