@@ -52,6 +52,11 @@ PRODUCT_PACKAGES += \
     libshim_camera \
     libhwjpeg
 
+# Configstore
+PRODUCT_PACKAGES += \
+    android.hardware.configstore@1.1-impl \
+    android.hardware.configstore@1.1-service
+
 # DRM
 PRODUCT_PACKAGES += \
     android.hardware.drm@1.0-impl \
