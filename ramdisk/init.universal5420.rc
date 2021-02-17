@@ -7,8 +7,6 @@ on init
 
     # Set permissions for persist partition
     mkdir /persist 0771 system system
-#    mkdir /mnt/shell/container 0700 system system
-#    mkdir /storage 0550 system sdcard_r
 
     mkdir /efs 0771 radio system
     mkdir /preload 0774 root root
@@ -125,15 +123,6 @@ on post-fs-data
     chmod 0600 /dev/btlock
     chown bluetooth bluetooth /dev/btlock
 
-# Added for TZ Playready DRM Support
-#    mkdir /efs/drm 0700 drm system
-#    mkdir /efs/drm/playready 0775 drm system
-
-#Private Mode
-#    mkdir /data/privatemode 0770 system system
-#    chown system system /data/privatemode
-#    restorecon /data/privatemode
-
 on boot
     mount debugfs /sys/kernel/debug /sys/kernel/debug
 
@@ -145,7 +134,6 @@ on boot
     write /sys/kernel/debug/tracing/tracing_on 0
 
     chown root radio /proc/cmdline
-#    chmod 0666 /dev/pvrsrvkm
 
 # Permissions for gpio_keys
     chown radio system /sys/class/sec/sec_key/wakeup_keys
@@ -242,9 +230,6 @@ on boot
 # OTG_TEST
     chown system radio /sys/class/host_notify/usb_otg/booster
     chmod 0660 /sys/class/host_notify/usb_otg/booster
-
-# SSWAP
-    write /proc/sys/vm/swappiness 130
 
 # mobicore
     mkdir /data/app/mcRegistry 0775 system system
@@ -400,22 +385,6 @@ on boot
 on fs
     mount_all /fstab.universal5420
 
-# Support Preload install apks
-#    mkdir /preload 0771 system system
-
-#For Absolute Persistence Partition
-#    mkdir /persdata 0755 system system
-#    mkdir /persdata/absolute 0750 system system
-
-#    wait /dev/block/platform/dw_mmc.0/by-name/PERSDATA
-#    check_fs /dev/block/platform/dw_mmc.0/by-name/PERSDATA ext4
-#    mount ext4 /dev/block/platform/dw_mmc.0/by-name/PERSDATA /persdata/absolute nosuid nodev barrier=1
-
-#    chown system system /persdata
-#    chmod 0755 /persdata
-#    chown system system /persdata/absolute
-#    chmod 0750 /persdata/absolute
-
 # Permissions for backlight
     chown system system /sys/class/backlight/panel/brightness
     chown system system /sys/class/backlight/panel/auto_brightness
@@ -477,32 +446,9 @@ service watchdogd /sbin/watchdogd 10 20
     seclabel u:r:watchdogd:s0
     disabled
 
-# Bluetooth LE 2 wired Test
-#service LE_dut_cmd_on /system/bin/bttestintf enable
-#    group bluetooth net_bt_admin
-#    disabled
-#    oneshot
-
-#service LE_dut_cmd_off /system/bin/bttestintf disable
-#    group bluetooth net_bt_admin
-#    disabled
-#    oneshot
-
-#service bttestdaemon /system/bin/bttestd
-#    class main
-#    user bluetooth
-#    group bluetooth net_bt_admin
-#    disabled
-#    oneshot
-
 # Kick watchdogd if debug_level is low
 on property:ro.debug_level=0x4f4c
     start watchdogd
-
-# on userdebug and eng builds, enable kgdb on the serial console
-#on property:ro.debuggable=1
-#    write /sys/module/kgdboc/parameters/kgdboc ttyFIQ1
-#    write /sys/module/fiq_debugger/parameters/kgdb_enable 1
 
 # GPS
 service gpsd /system/bin/gpsd -c /system/etc/gps.xml
@@ -517,10 +463,6 @@ service mobicore /system/bin/mcDriverDaemon -r /system/app/FFFFFFFF0000000000000
     user system
     group system
     oneshot
-
-#Private Mode
-#service privatemode /system/bin/sdcard /data/privatemode /mnt/shell/privatemode 1000 1000
-#    class late_start
 
 on charger
 
@@ -542,31 +484,6 @@ service charger /charger
     critical
     seclabel u:r:charger:s0
 
-# service for TZPR provisioning version check app
-#service scranton_RD /system/bin/scranton_RD
-#     class main
-#     user root
-#     disabled
-#     oneshot
-
-# start for TZPR provisioning version check app
-#on property:sys.mobicoredaemon.enable=true
-#    start scranton_RD
-
-# Secure Storage startup
-#service secure_storage /system/bin/secure_storage_daemon
-#    class core
-#    user system
-#    group system
-#    disabled
-
-#on property:ro.securestorage.support=true
-#    mkdir /dev/.secure_storage
-#    chmod 0711 /dev/.secure_storage
-#    chown system system /dev/.secure_storage
-#    restorecon -R /dev/.secure_storage
-#    start secure_storage
-
 # CS service
 service cs_service /system/bin/cs
     class main
@@ -574,33 +491,5 @@ service cs_service /system/bin/cs
     group system
     disabled
 
-#service TvoutService_C /system/bin/bintvoutservice
-#     class main
-#     user system
-#     group graphics
-#on property:ro.SecEDS.enable=false
-#    stop TvoutService_C
-
 on property:sys.mobicoredaemon.enable=true
     start cs_service
-
-# umount service
-#service umount_service /system/bin/umount /preload
-#    disabled
-#    oneshot
-
-# Support Preload install apks
-#on property:persist.sys.storage_preload=1
-#    mount ext4 /dev/block/platform/dw_mmc.0/by-name/HIDDEN /preload nosuid nodev ro barrier=1
-#    setprop storage.preload.complete 1
-
-#on property:persist.sys.storage_preload=0
-#    start umount_service
-
-# SSWAP
-service sswap /sbin/sswap -s
-    class core
-    user root
-    group root
-#    seclabel u:r:sswap:s0
-    oneshot

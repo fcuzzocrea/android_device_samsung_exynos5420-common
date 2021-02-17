@@ -61,23 +61,3 @@ service wpa_supplicant /vendor/bin/hw/wpa_supplicant \
 	group system wakelock
     disabled
     oneshot
-
-# start for WiFi MFG (TestMode)
-#service mfgloader /system/bin/mfgloader
-#    class main
-#    disabled
-#    oneshot
-
-#service wlandutservice /system/bin/wlandutservice
-#    class main
-#    user system
-#    group wifi net_raw net_admin system inet
-#    disabled
-#    oneshot
-
-# end of WiFi MFG (TestMode)
-
-#service olsrd /system/bin/olsrd -f /etc/wifi/olsrd.conf
-#    class main
-#    disabled
-#    oneshot
