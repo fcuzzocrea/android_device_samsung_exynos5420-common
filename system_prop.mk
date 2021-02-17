@@ -29,10 +29,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.sec.fle.encryption=true \
     ro.secwvk=220
 
-# Audio
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.config.media_vol_steps=30
-
 # sdcardfs
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.sys.sdcardfs=true
