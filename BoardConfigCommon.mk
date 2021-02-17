@@ -152,7 +152,9 @@ ENABLE_WEBGL := true
 BOARD_USES_WFD := true
 
 # Audio blobs
-TARGET_NEEDS_PLATFORM_TEXT_RELOCATIONS := true
+# Legacy blobs support
+TARGET_PROCESS_SDK_VERSION_OVERRIDE += \
+    /system/bin/mediaserver=22
 
 # Wifi
 BOARD_HAVE_SAMSUNG_WIFI          := true
