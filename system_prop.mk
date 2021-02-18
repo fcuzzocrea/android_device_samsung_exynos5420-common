@@ -2,34 +2,29 @@
 # Common system properties for exynos5420
 #
 
+# Bluetooth
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.bluetooth.disableabsvol=true \
+
 # Camera
 PRODUCT_PROPERTY_OVERRIDES += \
 	camera.disable_treble=true
 	
 # Media
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.sapa.jack.master=alsa \
-    ro.hdcp2.rx=tz \
-    persist.bluetooth.disableabsvol=true \
+    media.stagefright.legacyencoder=true \
+    media.stagefright.less-secure=true \
     persist.media.treble_omx=false
 
-# Open GL
+# Graphics
 PRODUCT_PROPERTY_OVERRIDES += \
-    debug.hwui.use_buffer_age=false \
-    ro.opengles.version=196609 \
+    debug.hwc.winupdate=0 \
     debug.hwui.renderer=opengl \
     debug.sf.disable_backpressure=1 \
     debug.sf.latch_unsignaled=1 \
-    debug.hwc.winupdate=0
+    ro.bq.gpu_to_cpu_unsupported=1 \
+    ro.opengles.version=196609 \
 
-
-# Randomly from stock
+# RIL
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.ril.gprsclass=10 \
-    ro.ril.hsxpa=1 \
-    ro.sec.fle.encryption=true \
-    ro.secwvk=220
-
-# sdcardfs
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.sys.sdcardfs=true
+    ro.hdcp2.rx=tz
