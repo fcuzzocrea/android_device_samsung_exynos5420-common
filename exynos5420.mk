@@ -171,7 +171,7 @@ PRODUCT_PACKAGES += \
     sensors.exynos5
 
 PRODUCT_COPY_FILES += \
-    $(COMMON_PATH)/sensors/_hals.conf:$(TARGET_COPY_OUT_VENDOR)/etc/sensors/_hals.conf
+    $(COMMON_PATH)/hardware/sensors/_hals.conf:$(TARGET_COPY_OUT_VENDOR)/etc/sensors/_hals.conf
 
 # Touch features
 PRODUCT_PACKAGES += \
