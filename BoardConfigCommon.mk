@@ -16,17 +16,14 @@
 
 COMMON_PATH := device/samsung/exynos5420-common
 
-# Platform
-TARGET_BOARD_PLATFORM := exynos5
-TARGET_SLSI_VARIANT := bsp
+# Include path
+TARGET_SPECIFIC_HEADER_PATH += $(COMMON_PATH)/include
 
 # Architecture
 TARGET_ARCH := arm
 TARGET_ARCH_VARIANT := armv7-a-neon
-TARGET_CPU_VARIANT := cortex-a15
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
-TARGET_CPU_SMP := true
 TARGET_CPU_VARIANT := cortex-a15
 
 # Bluetooth
@@ -36,16 +33,42 @@ BOARD_HAVE_SAMSUNG_BLUETOOTH := true
 BOARD_CUSTOM_BT_CONFIG := $(COMMON_PATH)/bluetooth/libbt_vndcfg.txt
 
 # Camera
-BOARD_NEEDS_MEMORYHEAPION := true
-BOARD_GLOBAL_CFLAGS += -DSAMSUNG_DVFS
 TARGET_HAS_LEGACY_CAMERA_HAL1 := true
 
-# Camera Shim
-TARGET_LD_SHIM_LIBS += \
-        /system/lib/libexynoscamera.so|libshim_camera.so
+# Charger
+BOARD_CHARGER_SHOW_PERCENTAGE := true
+BOARD_CHARGING_MODE_BOOTING_LPM := /sys/class/power_supply/battery/batt_lp_charging
+BOARD_BATTERY_DEVICE_NAME := battery
+BACKLIGHT_PATH := "/sys/class/backlight/panel/brightness"
 
-# Force the screenshot path to CPU consumer
-TARGET_FORCE_SCREENSHOT_CPU_PATH := true
+# Dexpreopt
+ifeq ($(HOST_OS),linux)
+  ifneq ($(TARGET_BUILD_VARIANT),eng)
+    WITH_DEXPREOPT_BOOT_IMG_AND_SYSTEM_SERVER_ONLY ?= false
+    WITH_DEXPREOPT := true
+  endif
+endif
+
+# FIMG2D
+BOARD_USES_SKIA_FIMGAPI := true
+
+# Filesystems
+BOARD_SYSTEMIMAGE_JOURNAL_SIZE := 0
+TARGET_USERIMAGES_USE_EXT4 := true
+BOARD_HAS_LARGE_FILESYSTEM := true
+
+# Firmware
+TARGET_NO_BOOTLOADER := true
+TARGET_NO_RADIOIMAGE := true
+
+# Graphics
+NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
+TARGET_RUNNING_WITHOUT_SYNC_FRAMEWORK := true
+BOARD_USES_EXYNOS5_COMMON_GRALLOC := true
+
+# HIDL
+DEVICE_MANIFEST_FILE := $(COMMON_PATH)/manifest.xml
+DEVICE_MATRIX_FILE := $(COMMON_PATH)/compatibility_matrix.xml
 
 # Kernel
 BOARD_KERNEL_BASE := 0x10000000
@@ -56,46 +79,29 @@ BOARD_CUSTOM_BOOTIMG_MK := $(COMMON_PATH)/mkbootimg.mk
 BOARD_KERNEL_IMAGE_NAME := zImage
 TARGET_LINUX_KERNEL_VERSION := 3.4
 
-# Charging mode
-BOARD_CHARGER_SHOW_PERCENTAGE := true
-BOARD_CHARGING_MODE_BOOTING_LPM := /sys/class/power_supply/battery/batt_lp_charging
-BOARD_BATTERY_DEVICE_NAME := battery
-BACKLIGHT_PATH := "/sys/class/backlight/panel/brightness"
-
-# Bootloader
-TARGET_BOOTLOADER_BOARD_NAME := universal5420
-TARGET_NO_BOOTLOADER := true
-TARGET_NO_RADIOIMAGE := true
-
-# FIMG2D
-BOARD_USES_SKIA_FIMGAPI := true
-
-# Graphics
-USE_OPENGL_RENDERER := true
-NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
-TARGET_RUNNING_WITHOUT_SYNC_FRAMEWORK := true
-BOARD_USES_EXYNOS5_COMMON_GRALLOC := true
-
-# Mixer
-BOARD_USE_BGRA_8888 := true
-
-# Include path
-TARGET_SPECIFIC_HEADER_PATH += $(COMMON_PATH)/include
-
-# Hardware
-BOARD_HARDWARE_CLASS += hardware/samsung/lineagehw
-
-# HIDL
-DEVICE_MANIFEST_FILE := $(COMMON_PATH)/manifest.xml
-DEVICE_MATRIX_FILE := $(COMMON_PATH)/compatibility_matrix.xml
-
 # Keymaster
 BOARD_USES_TRUST_KEYMASTER := true
 
+# Legacy blobs support
+TARGET_PROCESS_SDK_VERSION_OVERRIDE += \
+    /system/bin/mediaserver=22
+
 # Media
-BOARD_USE_SAMSUNG_CAMERAFORMAT_NV21 := true
-BOARD_GLOBAL_CFLAGS += -DWIDEVINE_PLUGIN_PRE_NOTIFY_ERROR
 TARGET_OMX_LEGACY_RESCALING := true
+
+# Platform
+BOARD_VENDOR := samsung
+TARGET_BOARD_PLATFORM := exynos5
+TARGET_BOOTLOADER_BOARD_NAME := universal5420
+TARGET_SOC := exynos5420
+TARGET_SLSI_VARIANT := bsp
+
+# Power
+TARGET_POWERHAL_VARIANT := samsung
+
+# Recovery
+TARGET_RECOVERY_FSTAB := $(COMMON_PATH)/ramdisk/fstab.universal5420
+BOARD_RECOVERY_SWIPE := true
 
 # Samsung  OpenMAX Video
 BOARD_USE_STOREMETADATA := true
@@ -120,45 +126,17 @@ BOARD_USE_CUSTOM_COMPONENT_SUPPORT := true
 BOARD_USE_VIDEO_EXT_FOR_WFD_HDCP := false
 BOARD_USE_SINGLE_PLANE_IN_DRM := false
 
-# Dexpreopt
-ifeq ($(HOST_OS),linux)
-  ifneq ($(TARGET_BUILD_VARIANT),eng)
-    WITH_DEXPREOPT_BOOT_IMG_AND_SYSTEM_SERVER_ONLY ?= false
-    WITH_DEXPREOPT := true
-  endif
-endif
-
-# Disable journaling on system.img to save space
-BOARD_SYSTEMIMAGE_JOURNAL_SIZE := 0
-
-# Unified PowerHAL
-TARGET_POWERHAL_VARIANT := samsung
-
-# Recovery
-TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/ramdisk/fstab.universal5420
-TARGET_USERIMAGES_USE_EXT4 := true
-BOARD_RECOVERY_SWIPE := true
-TARGET_RECOVERY_DENSITY := mdpi
-BOARD_HAS_LARGE_FILESYSTEM := true
-
-# Samsung Gralloc
-TARGET_SAMSUNG_GRALLOC_EXTERNAL_USECASES := true
-
 # Scaler
 BOARD_USES_SCALER := true
 BOARD_USES_GSC_VIDEO := true
 BOARD_USES_ONLY_GSC0_GSC1 := true
 
-# Webkit
-ENABLE_WEBGL := true
+#BOARD_SEPOLICY_DIRS += $(COMMON_PATH)/sepolicy
 
-# WFD
-BOARD_USES_WFD := true
-
-# Audio blobs
-# Legacy blobs support
-TARGET_PROCESS_SDK_VERSION_OVERRIDE += \
-    /system/bin/mediaserver=22
+# Shims
+TARGET_LD_SHIM_LIBS += \
+    /system/lib/libexynoscamera.so|libshim_camera.so \
+    /system/vendor/lib/egl/libGLES_mali.so|libgutils.so
 
 # Wifi
 BOARD_HAVE_SAMSUNG_WIFI          := true
@@ -171,7 +149,3 @@ BOARD_HOSTAPD_PRIVATE_LIB        := lib_driver_cmd_bcmdhd
 WIFI_DRIVER_FW_PATH_PARAM        := "/sys/module/dhd/parameters/firmware_path"
 WIFI_DRIVER_FW_PATH_STA          := "/system/etc/wifi/bcmdhd_sta.bin"
 WIFI_DRIVER_FW_PATH_AP           := "/system/etc/wifi/bcmdhd_apsta.bin"
-
-# Linker
-TARGET_LD_SHIM_LIBS += /system/vendor/lib/egl/libGLES_mali.so|libgutils.so
-
