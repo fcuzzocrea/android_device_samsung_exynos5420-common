@@ -1,20 +1,23 @@
-# aptX (Moto griffin - NCLS25.86-11-4-6-5)
-vendor/lib/libaptX_encoder.so|b03772672144d4b750a5672c2922aded93bb0512
+# All unpinned blobs are from T700XXU1CTK1
+# Vendor security patch level 2017-08-01
 
-# Camera - Pinned to T805ZHU1CQB1
+# aptX - from marlin - OPM1.171019.011
+lib/libaptX_encoder.so|984739a0bc968e18f75ced205733fe3f51c2d4f0
+
+# Camera
 lib/libexynoscamera.so
-
-# Camera - Pinned to T805XXU1CPH5/T705XXU1ANF8
 lib/libvdis.so
 
-# Camera - pinned to ???
-lib/libmor.so
+# GPS
+bin/gpsd
+lib/hw/gps.default.so:so:lib/hw/gps.universal5420.so
+lib/libfloatingfeature.so
 
-# Graphics - T6XX Midgard GPU Driver - Hexedited to hide EGL_KHR_surfaceless_context and pinned to ?????
+# Graphics
 vendor/lib/egl/libGLES_mali.so
 lib/libGLES_trace.so
 
-# Mobicore - Pinned to T800XXU1CRJ1
+# Mobicore
 app/FFFFFFFF000000000000000000000001.drbin
 app/mcRegistry/00060308060501020000000000000000.tlbin
 app/mcRegistry/02010000080300030000000000000000.tlbin
@@ -28,7 +31,6 @@ app/mcRegistry/ffffffff000000000000000000000007.tlbin
 app/mcRegistry/ffffffff000000000000000000000008.tlbin
 app/mcRegistry/ffffffff000000000000000000000009.tlbin
 app/mcRegistry/ffffffff00000000000000000000000a.tlbin
-app/mcRegistry/ffffffff00000000000000000000000b.tlbin
 app/mcRegistry/ffffffff00000000000000000000000c.tlbin
 app/mcRegistry/ffffffff00000000000000000000000d.tlbin
 app/mcRegistry/ffffffff00000000000000000000000e.tlbin
@@ -39,30 +41,30 @@ app/mcRegistry/ffffffff000000000000000000000012.tlbin
 app/mcRegistry/ffffffff000000000000000000000013.tlbin
 app/mcRegistry/ffffffff000000000000000000000017.tlbin
 app/mcRegistry/ffffffff000000000000000000000018.tlbin
+app/mcRegistry/ffffffff000000000000000000000041.tlbin
 app/mcRegistry/ffffffffd00000000000000000000004.tlbin
 app/mcRegistry/ffffffffd0000000000000000000000a.tlbin
 app/mcRegistry/ffffffffd0000000000000000000000e.tlbin
-app/mcRegistry/fffffffff0000000000000000000001e.tlbin
 bin/cs
 bin/mcDriverDaemon
 lib/libMcClient.so
 lib/libMcRegistry.so
 
-# NXP Noise Cancelling - Pinned to some note 4 phone I guess ?
-vendor/lib/liblvverx_3.25.00.so:vendor/lib/soundfx/liblvverx.so
-vendor/lib/liblvvetx_3.25.00.so:vendor/lib/soundfx/liblvvetx.so
+# NXP Noise Cancelling
+vendor/lib/liblvverx_3.25.00.so:vendor/lib/soundfx/liblvverx.so|575865ce767dd1ab576118ba47254799757a2a1b
+vendor/lib/liblvvetx_3.25.00.so:vendor/lib/soundfx/liblvvetx.so|a99afe8a6c44a9434284f9836976ab3ad2acbe91
 
-# OMX - Pinned to T805ZHU1CQB1
+# OMX
 lib/omx/libOMX.Exynos.AVC.Encoder.so
 
-# Renderscript - T6XX Midgard GPU Driver and pinned to ????? - This for me can be dropped.
+# Renderscript
 vendor/lib/libmalicore.bc
 vendor/lib/libRSDriverArm.so
 
-# Samsung S5P Multi Format Codec V5/V6 firmware (Used by Widevine) - Pinned to what ???
+# Samsung S5P Multi Format Codec V5/V6 firmware (Used by Widevine)
 vendor/firmware/mfc_fw.bin
 
-# SRP Audio driver for Samsung Exynos firmware - Pinned to what ?????
+# SRP Audio driver for Samsung Exynos firmware
 vendor/firmware/srp_cga.bin
 vendor/firmware/srp_data.bin
 vendor/firmware/srp_vliw.bin
@@ -71,7 +73,7 @@ vendor/firmware/srp_vliw.bin
 vendor/lib/libstlport.so|0be0a0d13e12fbf95d97d309dcbc25d3f969a469
 
 # Widevine - from N935FXXS7CTJ2
-vendor/bin/hw/android.hardware.drm@1.1-service.widevine
-vendor/etc/init/android.hardware.drm@1.1-service.widevine.rc
-vendor/lib/libwvhidl.so
-vendor/lib/mediadrm/libwvdrmengine.so
+vendor/bin/hw/android.hardware.drm@1.1-service.widevine|2721d7cbd6730d76d08cfd6d32c1bbaca715fb93
+vendor/etc/init/android.hardware.drm@1.1-service.widevine.rc|6d73a2063f155dcbd5ba95ca2d85e184cda61127
+vendor/lib/libwvhidl.so|fe6c10197d4b947bbb5431700bc79e937234f5e6
+vendor/lib/mediadrm/libwvdrmengine.so|ea269c91c0089c4f9a53a248eacf3adbd5717dfd
