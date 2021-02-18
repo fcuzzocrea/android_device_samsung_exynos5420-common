@@ -62,11 +62,6 @@ PRODUCT_PACKAGES += \
     android.hardware.drm@1.1-service.clearkey \
     android.hardware.drm@1.0-service
 
-# First Stage Mount
-PRODUCT_COPY_FILES += \
-    $(COMMON_PATH)/ramdisk/fstab.universal5420:$(TARGET_COPY_OUT_RAMDISK)/fstab.universal5420 \
-    $(COMMON_PATH)/ramdisk/fstab.universal5420:$(TARGET_COPY_OUT_VENDOR)/fstab.universal5420
-
 # GPS
 PRODUCT_PACKAGES += \
     android.hardware.gnss@1.1-impl

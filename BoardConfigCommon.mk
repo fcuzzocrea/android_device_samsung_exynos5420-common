@@ -100,7 +100,6 @@ TARGET_SLSI_VARIANT := bsp
 TARGET_POWERHAL_VARIANT := samsung
 
 # Recovery
-TARGET_RECOVERY_FSTAB := $(COMMON_PATH)/ramdisk/fstab.universal5420
 BOARD_RECOVERY_SWIPE := true
 
 # Samsung  OpenMAX Video
