@@ -62,7 +62,8 @@ PRODUCT_PACKAGES += \
 
 # GPS
 PRODUCT_PACKAGES += \
-    android.hardware.gnss@1.1-impl
+    android.hardware.gnss@1.1-impl \
+    libshim_gps
 
 # Graphics
 PRODUCT_PACKAGES += \

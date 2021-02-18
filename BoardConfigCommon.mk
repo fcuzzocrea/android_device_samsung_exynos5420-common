@@ -137,7 +137,8 @@ BOARD_USES_ONLY_GSC0_GSC1 := true
 # Shims
 TARGET_LD_SHIM_LIBS += \
     /system/lib/libexynoscamera.so|libshim_camera.so \
-    /system/vendor/lib/egl/libGLES_mali.so|libgutils.so
+    /system/vendor/lib/egl/libGLES_mali.so|libgutils.so \
+    /system/bin/gpsd|libshim_gps.so
 
 # Wifi
 BOARD_HAVE_SAMSUNG_WIFI          := true
