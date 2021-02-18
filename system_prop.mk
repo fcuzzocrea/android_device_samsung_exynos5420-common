@@ -19,7 +19,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.opengles.version=196609 \
     debug.hwui.renderer=opengl \
     debug.sf.disable_backpressure=1 \
-    debug.sf.latch_unsignaled=1
+    debug.sf.latch_unsignaled=1 \
+    debug.hwc.winupdate=0
 
 
 # Randomly from stock
