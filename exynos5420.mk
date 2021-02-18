@@ -16,8 +16,6 @@
 
 COMMON_PATH := device/samsung/exynos5420-common
 
-$(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
-
 DEVICE_PACKAGE_OVERLAYS += $(COMMON_PATH)/overlay
 
 # Audio
