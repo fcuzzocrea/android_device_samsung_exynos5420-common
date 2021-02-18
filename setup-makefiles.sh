@@ -60,9 +60,6 @@ LOCAL_MODULE_PATH := \$(TARGET_OUT_VENDOR_SHARED_LIBRARIES)/egl
 
 SYMLINKS := \$(TARGET_OUT)/vendor
 \$(SYMLINKS):
-	@echo "Symlink: vulkan.exynos5.so"
-	@mkdir -p \$@/lib/hw
-	\$(hide) ln -sf ../egl/libGLES_mali.so \$@/lib/hw/vulkan.exynos5.so
 	@echo "Symlink: libOpenCL.so"
 	\$(hide) ln -sf egl/libGLES_mali.so \$@/lib/libOpenCL.so
 	@echo "Symlink: libOpenCL.so.1"
@@ -79,7 +76,7 @@ EOF
 
 (cat << EOF) >> $LINEAGE_ROOT/$OUTDIR/$DEVICE_COMMON-vendor.mk
 
-# Create Mali links for Vulkan and OpenCL
+# Create Mali links for OpenCL
 PRODUCT_PACKAGES += libGLES_mali
 EOF
 ###################################################################################################

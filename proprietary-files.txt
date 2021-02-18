@@ -10,7 +10,7 @@ lib/libvdis.so
 
 # GPS
 bin/gpsd
-lib/hw/gps.default.so:so:lib/hw/gps.universal5420.so
+lib/hw/gps.default.so:lib/hw/gps.universal5420.so
 lib/libfloatingfeature.so
 
 # Graphics

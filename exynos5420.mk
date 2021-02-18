@@ -216,3 +216,6 @@ PRODUCT_COPY_FILES += \
 # call Samsung LSI board support package
 $(call inherit-product, hardware/samsung_slsi/exynos5/exynos5.mk)
 $(call inherit-product, hardware/samsung_slsi/exynos5420/exynos5420.mk)
+
+# call the proprietary setup
+$(call inherit-product-if-exists, vendor/samsung/exynos5420-common/exynos5420-common-vendor.mk)
