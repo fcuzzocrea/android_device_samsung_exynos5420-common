@@ -42,6 +42,8 @@ PRODUCT_PACKAGES += \
     libbt-vendor
 
 # Boot animation
+TARGET_BOOTANIMATION_PRELOAD := true
+TARGET_BOOTANIMATION_TEXTURE_CACHE := true
 TARGET_BOOTANIMATION_HALF_RES := true
 
 # Camera
@@ -217,14 +219,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # GPU producer to CPU consumer not supported
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.bq.gpu_to_cpu_unsupported=1
-
-# Dex2oat optimizations
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.sys.fw.dex2oat_thread_count=4
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    dalvik.vm.dex2oat-filter=speed \
-    dalvik.vm.dex2oat-swap=false
 
 # Enable multi-window by default
 PRODUCT_PROPERTY_OVERRIDES += \
