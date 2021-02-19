@@ -49,8 +49,7 @@ PRODUCT_PACKAGES += \
     android.hardware.camera.provider@2.4-impl.exynos5420 \
     camera.universal5420 \
     libshim_camera \
-    libhwjpeg \
-    Snap
+    libhwjpeg
 
 # Configstore
 PRODUCT_PACKAGES += \
