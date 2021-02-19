@@ -162,6 +162,10 @@ PRODUCT_PACKAGES += \
     libsecril-client \
     libsecril-client-sap
 
+# RenderScript HAL
+PRODUCT_PACKAGES += \
+    android.hardware.renderscript@1.0-impl
+
 # SEC
 PRODUCT_PACKAGES += \
     libsecnativefeature
